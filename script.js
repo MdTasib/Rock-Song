@@ -4,16 +4,22 @@
 //     const url = `https://api.lyrics.ovh/suggest/${searchText}`;
 //     fetch(url)
 //         .then(response => response.json())
-//         .then(data => displaySongs(data.data));
+//         .then(data => displaySongs(data.data))
+//         .catch(error => displayError('Something went wrong. Please Try Again'));
 // }
 
 // async way
 const searchSongs = async () => {
     const searchText = document.getElementById('search-field').value;
     const url = `https://api.lyrics.ovh/suggest/${searchText}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    displaySongs(data.data);
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        displaySongs(data.data);
+    }
+    catch (error) {
+        displayError('Something went wrong. Please Try Again')
+    }
 }
 
 const displaySongs = (songs) => {
@@ -42,18 +48,28 @@ const displaySongs = (songs) => {
 //     const url = `https://api.lyrics.ovh/v1/${artist}/${title}`
 //     fetch(url)
 //         .then(response => response.json())
-//         .then(data => displayLyrics(data.lyrics));
+//         .then(data => displayLyrics(data.lyrics))
+//         .catch(error => displayError('Something went wrong. Please Try Again'));
 // };
 
 // async way
 const getLyric = async (artist, title) => {
     const url = `https://api.lyrics.ovh/v1/${artist}/${title}`
-    const response = await fetch(url);
-    const data = await response.json();
-    displayLyrics(data.lyrics);
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        displayLyrics(data.lyrics);
+    }
+    catch (error) {
+        displayError('Sorry! I failed to load Lyrics, Please Try Again');
+    }
 };
 
 const displayLyrics = (lyrics) => {
     const lyricsContainer = document.getElementById('lyrics-container');
     lyricsContainer.innerText = lyrics;
+}
+const displayError = (error) => {
+    const errorTag = document.getElementById('error');
+    errorTag.innerText = error;
 }

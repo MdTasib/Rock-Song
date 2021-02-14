@@ -96,3 +96,10 @@ const displaySpinner = (show) => {
     loadingSpinner.classList.toggle('d-none');
     songContainer.classList.toggle('d-none');
 }
+
+// search box enter keypress
+document.getElementById('search-field').addEventListener('keypress', function (event) {
+    if (event.keyCode === 13) {
+        document.getElementById('search-button').click();
+    }
+})

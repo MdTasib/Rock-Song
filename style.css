@@ -41,3 +41,6 @@ body{
 .d-none {
     display: none !important;
 }
+audio {
+    max-width: 100%;
+}
